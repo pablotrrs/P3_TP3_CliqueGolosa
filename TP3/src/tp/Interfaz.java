@@ -237,7 +237,7 @@ public class Interfaz {
 						if (puedeCalcular()) {
 							puedeCalcular = false;
 							crearGrafoSolucion();
-							dibujarGrafo(grafo);
+							dibujarGrafo();
 						} else
 							avisarUsuario(lblFaltanPesos);
 					}
@@ -329,7 +329,7 @@ public class Interfaz {
 			cantidadVertices = Integer.valueOf(txfCantidadVertices.getText());
 			pesosVertices = new ArrayList<Double>();
 
-			mostrarGrafo(cantidadVertices);
+			mostrarGrafo();
 		}
 	}
 
@@ -427,7 +427,7 @@ public class Interfaz {
 		}
 	}
 
-	private void mostrarGrafo(int cantidadVertices) {
+	private void mostrarGrafo() {
 		if (!grafoInicial)
 			frame.setBounds((int) posicionInicialAux.getX() - 350, (int) posicionInicialAux.getY(), 240, 650);
 
@@ -438,7 +438,7 @@ public class Interfaz {
 			anadirVertice(i, 0.0);
 		}
 
-		dibujarGrafo(grafo);
+		dibujarGrafo();
 	}
 
 	private void crearGrafoSolucion() {
@@ -456,7 +456,7 @@ public class Interfaz {
 	}
 
 	@SuppressWarnings("serial")
-	private void dibujarGrafo(SingleGraph grafo) {
+	private void dibujarGrafo() {
 		frameGrafo.setVisible(false);
 		frameGrafo = new JDialog(frame, "");
 		frameGrafo.setBounds(400, 100, 640, 650);
