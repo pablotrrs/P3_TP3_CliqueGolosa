@@ -423,7 +423,7 @@ public class Interfaz {
 		}
 		// De nuevo porque no saca la ultima
 		for (Edge arista : grafo.getEachEdge()) {
-			grafo.removeEdge(arista);
+			grafo.removeEdge(arista); 
 		}
 	}
 
