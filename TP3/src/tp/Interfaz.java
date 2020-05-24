@@ -395,10 +395,10 @@ public class Interfaz {
 	// ************************* funciones para el grafo *************************
 	// //
 
-	private void anadirVertice(int i, double peso) {
-		grafo.addNode(String.valueOf(i));
-		grafo.getNode(String.valueOf(i)).addAttribute("ui.label", i + " (" + peso + ")");
-		grafo.getNode(String.valueOf(i)).setAttribute("xy", (int) (Math.random() * 640) + 1,
+	private void anadirVertice(int vertice, double peso) {
+		grafo.addNode(String.valueOf(vertice));
+		grafo.getNode(String.valueOf(vertice)).addAttribute("ui.label", vertice + " (" + peso + ")");
+		grafo.getNode(String.valueOf(vertice)).setAttribute("xy", (int) (Math.random() * 640) + 1,
 				(int) (Math.random() * 640) + 1);
 	}
 
@@ -413,8 +413,8 @@ public class Interfaz {
 		}
 	}
 
-	private void anadirArista(int i, int j) {
-		grafo.addEdge(String.valueOf(i) + String.valueOf(j), String.valueOf(i), String.valueOf((j)));
+	private void anadirArista(int extremo1, int extremo2) {
+		grafo.addEdge(String.valueOf(extremo1) + String.valueOf(extremo2), String.valueOf(extremo1), String.valueOf((extremo2)));
 	}
 
 	private void eliminarAristas() {
