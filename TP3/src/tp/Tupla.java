@@ -29,11 +29,9 @@ public class Tupla<T1, T2>   {
 
 	// Indica si el ArrayList contiene la Tupla pasada como parametro
 	public static boolean contiene(ArrayList<Tupla<Integer, Integer>> aristas, Tupla<Integer, Integer> arista) {
-		boolean ret = false;
-		for (int i = 0; i < aristas.size(); i++) {
-			ret |= aristas.get(i).equals(arista);
-		}
-		return ret;
+		int cantidadIguales = (int) aristas.stream().filter(a -> a.equals(arista)).count();
+		
+		return cantidadIguales >= 1;
 	}
 
 	public String toString() {
@@ -51,6 +49,4 @@ public class Tupla<T1, T2>   {
 	public void setSegundoElemento(T2 segundoElemento) {
 		this.segundoElemento = segundoElemento;
 	}
-
-	
 }

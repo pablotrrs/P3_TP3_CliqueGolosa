@@ -23,6 +23,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
+
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.implementations.*;
 import org.graphstream.ui.swingViewer.ViewPanel;
@@ -176,7 +178,7 @@ public class Interfaz {
 	}
 
 	private void eventos() {
-		for (JButton boton : botones) {
+		botones.stream().forEach(boton -> {
 			boton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -243,7 +245,7 @@ public class Interfaz {
 					}
 				}
 			});
-		}
+		});
 
 		int cantidadEtiquetasConFunciones = 2;
 		for (int i = 0; i < cantidadEtiquetasConFunciones; i++) {
@@ -310,13 +312,13 @@ public class Interfaz {
 	}
 
 	private void configurarEtiquetas() {
-		for (JLabel etiqueta : etiquetas) {
+		etiquetas.stream().forEach(etiqueta -> {
 			etiqueta.setForeground(Color.WHITE);
 			etiqueta.setHorizontalAlignment(SwingConstants.CENTER);
 			etiqueta.setBackground(new Color(178, 34, 34));
 			etiqueta.setFont(new Font("Quicksand Medium", Font.BOLD, 12));
 			frame.getContentPane().add(etiqueta);
-		}
+		});
 
 		lblX.setFont(new Font("Quicksand Medium", Font.BOLD, 18));
 		lblMinimizar.setFont(new Font("Harlow Solid Italic", Font.BOLD, 18));
@@ -408,13 +410,13 @@ public class Interfaz {
 	}
 
 	private void eliminarEtiquetasVertices() {
-		for (int i = 0; i < cantidadVertices; i++) {
-			grafo.getNode(i).addAttribute("ui.label", String.valueOf(i) + " (0.0)");
-		}
+		IntStream.range(0, cantidadVertices).forEach(
+				etiqueta -> grafo.getNode(etiqueta).addAttribute("ui.label", String.valueOf(etiqueta) + " (0.0)"));
 	}
 
 	private void anadirArista(int extremo1, int extremo2) {
-		grafo.addEdge(String.valueOf(extremo1) + String.valueOf(extremo2), String.valueOf(extremo1), String.valueOf((extremo2)));
+		grafo.addEdge(String.valueOf(extremo1) + String.valueOf(extremo2), String.valueOf(extremo1),
+				String.valueOf((extremo2)));
 	}
 
 	private void eliminarAristas() {
@@ -423,20 +425,17 @@ public class Interfaz {
 		}
 		// De nuevo porque no saca la ultima
 		for (Edge arista : grafo.getEachEdge()) {
-			grafo.removeEdge(arista); 
+			grafo.removeEdge(arista);
 		}
 	}
 
 	private void mostrarGrafo() {
 		if (!grafoInicial)
 			frame.setBounds((int) posicionInicialAux.getX() - 350, (int) posicionInicialAux.getY(), 240, 650);
-
 		grafoInicial = true;
 
 		grafo = new SingleGraph("grafo", false, true);
-		for (int i = 0; i < cantidadVertices; i++) {
-			anadirVertice(i, 0.0);
-		}
+		IntStream.range(0, cantidadVertices).forEach(vertice -> anadirVertice(vertice, 0.0));
 
 		dibujarGrafo();
 	}
@@ -446,13 +445,12 @@ public class Interfaz {
 
 		ArrayList<Tupla<Integer, Double>> grafoSolucion = Negocio.calcular(cantidadVertices, pesosVertices, aristas);
 
-		for (int i = 0; i < grafoSolucion.size(); i++) {
+		IntStream.range(0, grafoSolucion.size()).forEach(i -> {
 			anadirVertice(grafoSolucion.get(i).getPrimerElemento(), grafoSolucion.get(i).getSegundoElemento());
-
-			for (int j = i + 1; j < grafoSolucion.size(); j++) {
+			IntStream.range(i + 1, grafoSolucion.size()).forEach(j -> {
 				anadirArista(grafoSolucion.get(i).getPrimerElemento(), grafoSolucion.get(j).getPrimerElemento());
-			}
-		}
+			});
+		});
 	}
 
 	@SuppressWarnings("serial")
