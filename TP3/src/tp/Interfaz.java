@@ -23,6 +23,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import org.graphstream.graph.Edge;
@@ -212,6 +213,7 @@ public class Interfaz {
 					else if (boton.getText().equals("ingresar arista")) {
 						if (puedeCalcular && cantidadVertices > 1) {
 							int[] extremos = new int[2];
+							Arrays.fill(extremos, -1);
 
 							for (int i = 0; i < 2; i++) {
 								int aux = i + 1;
