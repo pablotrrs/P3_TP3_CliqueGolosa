@@ -211,7 +211,7 @@ public class Interfaz {
 					}
 					// Ingresa las aristas del grafo
 					else if (boton.getText().equals("ingresar arista")) {
-						if (puedeCalcular && cantidadVertices > 1) {
+						if (puedeCalcular() && cantidadVertices > 1) {
 							int[] extremos = new int[2];
 							Arrays.fill(extremos, -1);
 
@@ -234,7 +234,8 @@ public class Interfaz {
 								lblAristaIngresada.setText("arista NO ingresada!");
 
 							avisarUsuario(lblAristaIngresada);
-						}
+						} else 
+							avisarUsuario(lblFaltanPesos);
 					}
 					// Se calcula la clique de mayor peso
 					else if (boton.getText().equals("calcular")) {
